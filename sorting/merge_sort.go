@@ -1,3 +1,6 @@
+//implementation of merge sort
+//time complexity is O(nlogn) both in worst and best case
+
 package main
 
 import (

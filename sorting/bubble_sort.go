@@ -1,3 +1,6 @@
+//implementation of bubble_sort
+//worst case time complexity is O(n^2)
+
 package main
 
 import (

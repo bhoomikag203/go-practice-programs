@@ -1,3 +1,6 @@
+//implementation of insertion sort
+//time complexity is O(n^2)
+
 package main
 
 import (

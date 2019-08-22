@@ -1,3 +1,7 @@
+//implementation of quick sort
+//time complexity is O(n^2)
+//best casse time complexity is O(nlogn)
+
 package main
 
 import (
@@ -16,14 +20,15 @@ func quickSort(list []int, low, high int) []int {
 
 func partition(list []int, low, high int) int {
 	pivot := list[high]
+	i := low - 1
 	for j := low; j < high; j++ {
 		if list[j] < pivot {
-			list[j], list[low] = list[low], list[j]
-			low++
+			i++
+			list[i], list[j] = list[j], list[i]
 		}
 	}
-	list[low], list[high] = list[high], list[low]
-	return low
+	list[i+1], list[high] = list[high], list[i+1]
+	return i + 1
 }
 
 func main() {
