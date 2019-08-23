@@ -6,13 +6,20 @@ import (
 )
 
 func TestSelectionSort(t *testing.T) {
-	list := []int{3, 2, 4, 1}
-	want := []int{1, 2, 3, 4}
+	tests := []struct {
+		input    []int
+		expected []int
+	}{
+		{input: []int{3, 2, 4, 1}, expected: []int{1, 2, 3, 4}},
+		{input: []int{40, 20, 30}, expected: []int{20, 30, 40}},
+		{input: []int{1, 2, 3, 4}, expected: []int{1, 2, 3, 4}},
+	}
 
-	got := selection_sort(list)
-
-	if !reflect.DeepEqual(got, want) {
-		t.Errorf("got %v want %v", got, want)
+	for _, test := range tests {
+		output := selection_sort(test.input)
+		if !reflect.DeepEqual(output, test.expected) {
+			t.Errorf("got %v want %v", output, test.expected)
+		}
 	}
 
 }
