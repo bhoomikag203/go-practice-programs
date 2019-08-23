@@ -5,7 +5,7 @@ import (
 	"testing"
 )
 
-func TestBubbleSort(t *testing.T) {
+func TestInsertionSort(t *testing.T) {
 	tests := []struct {
 		input    []int
 		expected []int
@@ -16,7 +16,7 @@ func TestBubbleSort(t *testing.T) {
 	}
 
 	for _, test := range tests {
-		output := bubble_sort(test.input)
+		output := insertion_sort(test.input)
 		if !reflect.DeepEqual(output, test.expected) {
 			t.Errorf("got %v want %v", output, test.expected)
 		}
