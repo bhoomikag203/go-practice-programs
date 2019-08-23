@@ -8,13 +8,13 @@ import (
 	"fmt"
 )
 
-func quickSort(list []int, low, high int) []int {
+func quick_sort(list []int, low, high int) []int {
 	if low > high {
 		return list
 	}
 	p := partition(list, low, high)
-	quickSort(list, low, p-1)
-	quickSort(list, p+1, high)
+	quick_sort(list, low, p-1)
+	quick_sort(list, p+1, high)
 	return list
 }
 
@@ -33,5 +33,5 @@ func partition(list []int, low, high int) int {
 
 func main() {
 	list := []int{10, 3, 2, 49, 30}
-	fmt.Println(quickSort(list, 0, len(list)-1))
+	fmt.Println(quick_sort(list, 0, len(list)-1))
 }
