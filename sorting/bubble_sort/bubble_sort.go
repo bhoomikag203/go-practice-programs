@@ -13,9 +13,7 @@ func bubble_sort(list []int) []int {
 		sorted := false
 		for j := 0; j < length-i; j++ {
 			if list[j] > list[j+1] {
-				temp := list[j]
-				list[j] = list[j+1]
-				list[j+1] = temp
+				list[j+1], list[j] = list[j], list[j+1]
 				sorted = true
 			}
 		}
