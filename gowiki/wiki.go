@@ -12,8 +12,11 @@ func (p *Page) save() error {
 	return ioutil.WriteFile(filename, p.Body, 0600)
 }
 
-func loadPage(title string) *Page {
+func loadPage(title string) (*Page, error) {
 	filename := title + ".txt"
-	body, _ := ioutil.ReadFile(filename)
-	return &Page{Title: title, Body: body}
+	body, error := ioutil.ReadFile(filename)
+	if error != nil {
+		return nil, error
+	}
+	return &Page{Title: title, Body: body}, nil
 }
