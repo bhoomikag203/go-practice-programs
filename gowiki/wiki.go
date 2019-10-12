@@ -1,7 +1,7 @@
 package main
 
 import (
-	"fmt"
+	"html/template"
 	"io/ioutil"
 	"log"
 	"net/http"
@@ -19,25 +19,46 @@ func (p *Page) save() error {
 
 func loadPage(title string) (*Page, error) {
 	filename := title + ".txt"
-	body, error := ioutil.ReadFile(filename)
-	if error != nil {
-		return nil, error
+	body, err := ioutil.ReadFile(filename)
+	if err != nil {
+		return nil, err
 	}
 	return &Page{Title: title, Body: body}, nil
+}
+
+func renderTemplate(w http.ResponseWriter, tmpl string, p *Page) {
+	t, err := template.ParseFiles(tmpl + ".html")
+
+	if err != nil {
+		log.Print("template parsing error")
+	}
+
+	err = t.Execute(w, p)
+	if err != nil {
+		log.Print("template executing error")
+	}
+
 }
 
 func viewHandler(w http.ResponseWriter, r *http.Request) {
 	title := r.URL.Path[len("/view/"):]
 	p, _ := loadPage(title)
-	fmt.Fprintf(w, "<h1>%s</h1><div>%s</div>", p.Title, p.Body)
+	renderTemplate(w, "view", p)
+}
+
+func editHandler(w http.ResponseWriter, r *http.Request) {
+	title := r.URL.Path[len("/edit/"):]
+	p, err := loadPage(title)
+	if err != nil {
+		p = &Page{Title: title}
+	}
+	renderTemplate(w, "edit", p)
 }
 
 func main() {
-	p1 := &Page{Title: "TestPage", Body: []byte("This is a sample page.")}
-	p1.save()
-	p2, _ := loadPage("TestPage")
-	fmt.Println(string(p2.Body))
-
+	http.HandleFunc("/edit/", editHandler)
 	http.HandleFunc("/view/", viewHandler)
-	log.Fatal(http.ListenAndServe(":8080", nil))
+
+	//http.HandleFunc("/save/", saveHandler)
+	log.Fatal(http.ListenAndServe(":8081", nil))
 }
