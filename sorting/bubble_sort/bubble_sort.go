@@ -7,11 +7,10 @@ import (
 	"fmt"
 )
 
-func bubble_sort(list []int) []int {
-	length := len(list) - 1
-	for i := 0; i < length; i++ {
+func bubbleSort(list []int) []int {
+	for i := 0; i < len(list)-1; i++ {
 		sorted := false
-		for j := 0; j < length-i; j++ {
+		for j := 0; j < len(list)-1-i; j++ {
 			if list[j] > list[j+1] {
 				list[j+1], list[j] = list[j], list[j+1]
 				sorted = true
@@ -27,5 +26,5 @@ func bubble_sort(list []int) []int {
 
 func main() {
 	list := []int{10, 54, 20, 3, 5, 9}
-	fmt.Println(bubble_sort(list))
+	fmt.Println(bubbleSort(list))
 }
