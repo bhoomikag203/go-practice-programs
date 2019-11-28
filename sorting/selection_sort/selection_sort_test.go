@@ -1,4 +1,4 @@
-package main
+package selection_sort
 
 import (
 	"reflect"
@@ -16,7 +16,7 @@ func TestSelectionSort(t *testing.T) {
 	}
 
 	for _, test := range tests {
-		output := selection_sort(test.input)
+		output := selectionSort(test.input)
 		if !reflect.DeepEqual(output, test.expected) {
 			t.Errorf("got %v want %v", output, test.expected)
 		}
