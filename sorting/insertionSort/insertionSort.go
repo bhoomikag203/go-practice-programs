@@ -4,8 +4,7 @@
 package insertion_sort
 
 func insertion_sort(list []int) []int {
-	length := len(list)
-	for i := 0; i < length; i++ {
+	for i := 0; i < len(list); i++ {
 		key := list[i]
 		j := i - 1
 
